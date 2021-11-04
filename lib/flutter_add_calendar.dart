@@ -6,7 +6,7 @@ class FlutterAddCalendar {
   static const MethodChannel _channel =
       const MethodChannel('flutter_add_calendar/native');
 
-  static FlutterAddCalendar _instance;
+  static FlutterAddCalendar? _instance;
   final _onStatusAdd = new StreamController<StatusCalendar>.broadcast();
 
   factory FlutterAddCalendar() => _instance ??= new FlutterAddCalendar._();
@@ -40,25 +40,25 @@ class FlutterAddCalendar {
     }
   }
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
+  static Future<String?> get platformVersion async {
+    final String? version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
 }
 
 class StatusCalendar {
-  final String code;
-  final String message;
+  final String? code;
+  final String? message;
 
   StatusCalendar(this.code, this.message);
 }
 
 class EventInfo {
-  final String title;
-  final String desc;
-  final String location;
-  final String startDate;
-  final String endDate;
+  final String? title;
+  final String? desc;
+  final String? location;
+  final String? startDate;
+  final String? endDate;
 
   EventInfo(
       {this.title, this.desc, this.startDate, this.endDate, this.location});
