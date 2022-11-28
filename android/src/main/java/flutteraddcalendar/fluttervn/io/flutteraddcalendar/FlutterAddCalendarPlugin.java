@@ -96,23 +96,24 @@ public class FlutterAddCalendarPlugin implements FlutterPlugin, MethodCallHandle
         ContentValues values = new ContentValues();
 
         values.put(CalendarContract.Events.DTSTART, startDate);
-        values.put(CalendarContract.Events.DTSTART, endDate);
+        values.put(CalendarContract.Events.DTEND, endDate);
         values.put(CalendarContract.Events.TITLE, title);
         values.put(CalendarContract.Events.DESCRIPTION, desc);
         values.put(CalendarContract.Events.EVENT_LOCATION, location);
 
         TimeZone timeZone = TimeZone.getDefault();
         values.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());
+        values.put(CalendarContract.Events.EVENT_END_TIMEZONE, timeZone.getID());
 
-// Default calendar
+        // Default calendar
         values.put(CalendarContract.Events.CALENDAR_ID, getCalendarId());
 
-// Set Period for 1 Hour
-        values.put(CalendarContract.Events.DURATION, "+P1H");
+        // Set Period for 1 Hour
+        // values.put(CalendarContract.Events.DURATION, "+P1H");
 
         values.put(CalendarContract.Events.HAS_ALARM, 1);
 
-// Insert event to calendar
+        // Insert event to calendar
         Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
     }
 
