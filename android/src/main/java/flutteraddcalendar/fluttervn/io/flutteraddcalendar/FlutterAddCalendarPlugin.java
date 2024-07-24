@@ -56,12 +56,12 @@ public class FlutterAddCalendarPlugin implements FlutterPlugin, MethodCallHandle
     @Override
     public void onMethodCall(MethodCall call, Result result) {
         if (call.method.equals("setEventToCalendar")) {
-            final Boolean silently = Boolean.valueOf(String.valueOf(call.argument("silently")));
-            if(!silently){
-                addEventToCalendar(String.valueOf(call.argument("title")), String.valueOf(call.argument("desc")),String.valueOf(call.argument("location")), Long.valueOf(String.valueOf(call.argument("startDate"))), Long.valueOf(String.valueOf(call.argument("endDate"))));
+            final Boolean silently = Boolean.parseBoolean(call.argument("silently"));
+            if (!silently) {
+                addEventToCalendar(call.argument("title"), call.argument("desc"), call.argument("location"), Long.parseLong(call.argument("startDate")), Long.parseLong(call.argument("endDate")));
 //                result.success("Android " + android.os.Build.VERSION.RELEASE);
             } else {
-                addSilentEventToCalendar(String.valueOf(call.argument("title")), String.valueOf(call.argument("desc")),String.valueOf(call.argument("location")), Long.valueOf(String.valueOf(call.argument("startDate"))), Long.valueOf(String.valueOf(call.argument("endDate"))));
+                addSilentEventToCalendar(call.argument("title"), call.argument("desc"), call.argument("location"), Long.valueOf(call.argument("startDate")), Long.valueOf(call.argument("endDate")));
             }
         } else {
             result.notImplemented();
